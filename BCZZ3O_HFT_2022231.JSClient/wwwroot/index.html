@@ -6,7 +6,38 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <h1>Vehicle Catalog</h1>
 
+    <div id="formdiv">
+        <label>Registration</label>
+        <input type="text" id="vehiclereg" />
+
+        <label>Manufacturer</label>
+        <input type="text" id="vehiclemanufact" />
+
+        <label>Model</label>
+        <input type="text" id="vehiclemodel" />
+
+        <label>Length</label>
+        <input type="number" id="vehiclelength" />
+
+        <button type="button" onclick="create()">Add Vehicle</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Registartion</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Lenght</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+
+        </tbody>
+    </table>
 
     <script src="script.js">
 
