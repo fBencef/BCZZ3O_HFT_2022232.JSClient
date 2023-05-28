@@ -19,7 +19,7 @@ namespace VehicleFleetDb.Logic
         public void Create(Driver item)
         {
             if (item.Age < 21) throw new ArgumentException("Driver is too young.");
-            if (item.Name.Contains(' ') || item.Name.Length < 3) throw new ArgumentException("Invalid driver name.");
+            if (/*item.Name.Contains(' ') || */item.Name.Length < 3) throw new ArgumentException("Invalid driver name.");
             this.repository.Create(item);
         }
 

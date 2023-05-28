@@ -6,56 +6,99 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Vehicle Catalog</h1>
+    <button type="button" onclick="vehiclebuttonclicked()">Vehcile Catalog</button>
+    <button type="button" onclick="driverbuttonclicked()">Driver Catalog</button>
+    <div id="vehiclecatalogdiv">
+        <h1>Vehicle Catalog</h1>
 
-    <div id="formdiv">
-        <label>Registration</label>
-        <input type="text" id="vehiclereg" />
+        <div id="vehicleformdiv">
+            <label>Registration</label>
+            <input type="text" id="vehiclereg" />
 
-        <label>Manufacturer</label>
-        <input type="text" id="vehiclemanufact" />
+            <label>Manufacturer</label>
+            <input type="text" id="vehiclemanufact" />
 
-        <label>Model</label>
-        <input type="text" id="vehiclemodel" />
+            <label>Model</label>
+            <input type="text" id="vehiclemodel" />
 
-        <label>Length</label>
-        <input type="number" id="vehiclelength" />
+            <label>Length</label>
+            <input type="number" id="vehiclelength" />
 
-        <button type="button" onclick="create()">Add Vehicle</button>
+            <button type="button" onclick="create()">Add Vehicle</button>
+        </div>
+
+        <div id="vehicleupdateformdiv">
+            <label>Registration</label>
+            <input type="text" id="vehicleregtoupdate" disabled />
+
+            <!--<label>New registration</label>
+            <input type="text" id="displayregtoupdate" />-->
+
+            <label>Manufacturer</label>
+            <input type="text" id="vehiclemanufacttoupdate" />
+
+            <label>Model</label>
+            <input type="text" id="vehiclemodeltoupdate" />
+
+            <label>Length</label>
+            <input type="number" id="vehiclelengthtoupdate" />
+
+            <button type="button" onclick="update()">Update Vehicle</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Registartion</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Lenght</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="vehicleresultarea">
+            </tbody>
+        </table>
     </div>
+    <div id="drivercatalogdiv">
+        <h1>Driver Catalog</h1>
 
-    <div id="updateformdiv">
-        <label>Registration</label>
-        <input type="text" id="vehicleregtoupdate" disabled />
+        <div id="driverformdiv">
+            <label>Name</label>
+            <input type="text" id="drivername" />
 
-        <!--<label>New registration</label>
-        <input type="text" id="displayregtoupdate" />-->
+            <label>Age</label>
+            <input type="text" id="driverage" />
 
-        <label>Manufacturer</label>
-        <input type="text" id="vehiclemanufacttoupdate" />
+            <button type="button" onclick="create()">Add Driver</button>
+        </div>
 
-        <label>Model</label>
-        <input type="text" id="vehiclemodeltoupdate" />
+        <div id="driverupdateformdiv">
+            <label>ID</label>
+            <input type="text" id="driveridtoupdate" disabled />
 
-        <label>Length</label>
-        <input type="number" id="vehiclelengthtoupdate" />
+            <label>Name</label>
+            <input type="text" id="drivernametoupdate" />
 
-        <button type="button" onclick="update()">Update Vehicle</button>
+            <label>Age</label>
+            <input type="text" id="driveragetoupdate" />
+
+            <button type="button" onclick="update()">Update Driver</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="driverresultarea">
+            </tbody>
+        </table>
     </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Registartion</th>
-                <th>Manufacturer</th>
-                <th>Model</th>
-                <th>Lenght</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="resultarea">
-        </tbody>
-    </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>

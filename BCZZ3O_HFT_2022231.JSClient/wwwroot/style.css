@@ -22,36 +22,44 @@ th {
     background-color: lightcyan;
 }
 
-#updateformdiv {
+#vehicleupdateformdiv, #driverupdateformdiv {
     display: none;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-    #updateformdiv label, input, button {
+    #vehicleupdateformdiv, #driverupdateformdiv label, input, button {
         margin: 10px;
         padding: 5px;
     }
 
-    #updateformdiv label {
+    #vehicleupdateformdiv, #driverupdateformdiv label {
         font-weight: bolder;
     }
-    
-#formdiv {
+
+#vehicleformdiv, #driverformdiv {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-    #formdiv label, input, button {
+    #vehicleformdiv, #driverformdiv label, input, button {
         margin: 10px;
         padding: 5px;
     }
 
-    #formdiv label {
+    #vehicleformdiv, #driverformdiv label {
         font-weight: bolder;
     }
 
 table button {
     padding: 2px;
+}
+
+#vehiclecatalogdiv {
+    display: none
+}
+
+#drivercatalogdiv {
+    display: initial
 }
