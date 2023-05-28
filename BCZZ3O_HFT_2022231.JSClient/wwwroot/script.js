@@ -1,6 +1,7 @@
 ﻿let vehicles = [];
 let drivers = [];
 let shifts = [];
+let ncresults = [];
 
 let connection = null;
 let showing = 'vehicle';
@@ -19,16 +20,25 @@ function pagebuttonclicked(page) {
         document.getElementById('vehiclecatalogdiv').style.display = 'initial';
         document.getElementById('drivercatalogdiv').style.display = 'none';
         document.getElementById('shiftcatalogdiv').style.display = 'none';
+        document.getElementById('noncrudsdiv').style.display = 'none';
     }
     if (showing == 'driver') {
         document.getElementById('vehiclecatalogdiv').style.display = 'none';
         document.getElementById('drivercatalogdiv').style.display = 'initial';
         document.getElementById('shiftcatalogdiv').style.display = 'none';
+        document.getElementById('noncrudsdiv').style.display = 'none';
     }
     if (showing == 'shift') {
         document.getElementById('vehiclecatalogdiv').style.display = 'none';
         document.getElementById('drivercatalogdiv').style.display = 'none';
         document.getElementById('shiftcatalogdiv').style.display = 'initial';
+        document.getElementById('noncrudsdiv').style.display = 'none';
+    }
+    if (showing == 'nc') {
+        document.getElementById('vehiclecatalogdiv').style.display = 'none';
+        document.getElementById('drivercatalogdiv').style.display = 'none';
+        document.getElementById('shiftcatalogdiv').style.display = 'none';
+        document.getElementById('noncrudsdiv').style.display = 'initial';
     }
     display();
 }
@@ -186,6 +196,14 @@ function display() {
                 + "</td></tr>";
             //console.log(t.registration)
         });
+    }
+    if (showing == 'nc') {
+        fetch('http://localhost:47322/NC/AvgDriverAge')
+            .then(x => x.json())
+            .then(y => {
+                console.log(y);
+                document.getElementById('avgageresult').innerHTML = Math.round(y);
+            });
     }
 }
 
@@ -430,4 +448,63 @@ function remove(id) {
     }
 
 
+}
+
+function getshiftsofdriver() {
+    fetch('http://localhost:47322/NC/ShiftsOfDriver/' + document.getElementById('drivernameinput').value)
+        .then(x => x.json())
+        .then(y => {
+            console.log(y);
+            ncresults = y;
+            document.getElementById('shiftsofdriverresults').innerHTML = '';
+            ncresults.forEach(t => {
+                document.getElementById('shiftsofdriverresults').innerHTML +=
+                    t.line + "/" + t.tour + "<br>";
+            });
+        });
+}
+
+function getmodelsofmanufact() {
+    fetch('http://localhost:47322/NC/ListModels/' + document.getElementById('manufactinput').value)
+        .then(x => x.json())
+        .then(y => {
+            console.log(y);
+            ncresults = y;
+            document.getElementById('modelsofmanufactresults').innerHTML = '';
+            ncresults.forEach(t => {
+                document.getElementById('modelsofmanufactresults').innerHTML +=
+                    t + "<br>";
+            });
+        });
+}
+
+function getdriversofvehicle() {
+    fetch('http://localhost:47322/NC/ListDrivers/' + document.getElementById('vehicleinput').value)
+        .then(x => x.json())
+        .then(y => {
+            console.log(y);
+            ncresults = y;
+            document.getElementById('driversofvehicleresults').innerHTML = '';
+            ncresults.forEach(t => {
+                document.getElementById('driversofvehicleresults').innerHTML +=
+                    t.name + "<br>";
+            });
+        });
+}
+
+function getvehiclesofline() {
+    fetch('http://localhost:47322/NC/VehiclesOnLine/' + document.getElementById('lineinput').value)
+        .then(x => x.json())
+        .then(y => {
+            console.log(y);
+            ncresults = y;
+            document.getElementById('vehiclesonlineresults').innerHTML = '';
+            ncresults.forEach(t => {
+                document.getElementById('vehiclesonlineresults').innerHTML +=
+                    t.displayReg
+                    + " (" + t.manufacturer + " " + t.model + ") "
+                    + "[" + t.length + "m]"
+                    + "<br>";
+            });
+        });
 }

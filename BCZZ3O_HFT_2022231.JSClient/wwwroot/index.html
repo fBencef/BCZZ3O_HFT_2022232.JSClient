@@ -9,6 +9,8 @@
     <button type="button" onclick="pagebuttonclicked('vehicle')">Vehcile Catalog</button>
     <button type="button" onclick="pagebuttonclicked('driver')">Driver Catalog</button>
     <button type="button" onclick="pagebuttonclicked('shift')">Shift Catalog</button>
+    <button type="button" onclick="pagebuttonclicked('nc')">Non CRUDs</button>
+
     <div id="vehiclecatalogdiv">
         <h1>Vehicle Catalog</h1>
 
@@ -158,6 +160,37 @@
             <tbody id="shiftresultarea">
             </tbody>
         </table>
+    </div>
+    <div id="noncrudsdiv">
+        <h1>Non CRUDs</h1>
+
+        <h3>Average age of drivers: </h3>
+        <div id="avgageresult"></div>
+
+        <h3>Shifts of a driver</h3>
+        <label>Enter driver's name: </label>
+        <input type="text" id="drivernameinput" />
+        <button type="button" onclick="getshiftsofdriver()">Let's see!</button>
+        <div id="shiftsofdriverresults"></div>
+
+        <h3>Models of a manufacturer</h3>
+        <label>Enter a manufacturer: </label>
+        <input type="text" id="manufactinput" />
+        <button type="button" onclick="getmodelsofmanufact()">Let's see!</button>
+        <div id="modelsofmanufactresults"></div>
+
+        <h3>Drivers of a vehicle</h3>
+        <label>Enter a vehicle registration: </label>
+        <input type="text" id="vehicleinput" />
+        <button type="button" onclick="getdriversofvehicle()">Let's see!</button>
+        <div id="driversofvehicleresults"></div>
+
+        <h3>vehicles on a line</h3>
+        <label>Enter a line: </label>
+        <input type="text" id="lineinput" />
+        <button type="button" onclick="getvehiclesofline()">Let's see!</button>
+        <div id="vehiclesonlineresults"></div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>

@@ -57,13 +57,17 @@ table button {
 }
 
 #vehiclecatalogdiv {
-    display: none
-}
-
-#drivercatalogdiv {
     display: initial
 }
 
+#drivercatalogdiv {
+    display: none
+}
+
 #shiftcatalogdiv {
+    display: none
+}
+
+#noncrudsdiv {
     display: none
 }
