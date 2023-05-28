@@ -2,41 +2,56 @@
     font-family: Tahoma;
 }
 
-table{
+table {
     width: 100%;
 }
 
-table, th, td{
+table, th, td {
     border: 1px solid black;
 }
 
-table{
+table {
     border-collapse: collapse;
 }
 
-th, td{
+th, td {
     padding: 5px
 }
 
-th{
+th {
     background-color: lightcyan;
 }
 
-#formdiv{
-    display: flex;
-    flex-direction:column;
+#updateformdiv {
+    display: none;
+    flex-direction: column;
     margin-bottom: 10px;
 }
 
-#formdiv, label, input, button{
-    margin: 10px;
-    padding: 5px;
+    #updateformdiv label, input, button {
+        margin: 10px;
+        padding: 5px;
+    }
+
+    #updateformdiv label {
+        font-weight: bolder;
+    }
+    
+#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-#formdiv, label{
-    font-weight: bolder;
-}
+    #formdiv label, input, button {
+        margin: 10px;
+        padding: 5px;
+    }
 
-table button{
+    #formdiv label {
+        font-weight: bolder;
+    }
+
+table button {
     padding: 2px;
 }
