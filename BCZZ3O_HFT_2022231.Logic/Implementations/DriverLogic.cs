@@ -48,7 +48,7 @@ namespace VehicleFleetDb.Logic
 
         public void Update(Driver item)
         {
-            this.repository.Read(item.DriverId).Name = item.Name;
+            this.repository.Update(item);
         }
 
         IEnumerable<Driver> IDriverLogic.ReadAll()

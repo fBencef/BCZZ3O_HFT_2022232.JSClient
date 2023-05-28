@@ -22,7 +22,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="2">
-            <Label Content="ID" Background="LightBlue" Padding="10" />
+            <Label Content="ID" Background="LightBlue" Padding="10"/>
             <TextBox Text="{Binding SelectedDriver.DriverId}" Padding="10"/>
             <Label Content="Name" Background="LightBlue" Padding="10" />
             <TextBox Text="{Binding SelectedDriver.Name}" Padding="10"/>

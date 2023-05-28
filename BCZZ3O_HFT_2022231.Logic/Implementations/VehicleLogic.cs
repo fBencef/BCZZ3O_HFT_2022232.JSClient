@@ -42,7 +42,7 @@ namespace VehicleFleetDb.Logic
 
         public void Update(Vehicle item)
         {
-            this.repository.Read(item.Registration).Registration = item.DisplayReg;
+            this.repository.Update(item);
         }
 
         IEnumerable<Vehicle> IVehicleLogic.ReadAll()

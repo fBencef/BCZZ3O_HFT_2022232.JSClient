@@ -47,7 +47,7 @@ namespace VehicleFleetDb.Models
 
         public override string ToString()
         {
-            return $"{Line}/{Tour} - {Vehicle.DisplayReg}";
+            return $"{Line}/{Tour} - {Vehicle.Registration}";
         }
     }
 }

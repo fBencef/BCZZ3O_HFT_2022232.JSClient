@@ -21,7 +21,7 @@
                         <Label Content="{Binding Line}" />
                         <Label Content="{Binding Tour}" />
                         <Label Content="{Binding VehicleId}" />
-                        <Label Content="{Binding Driver.Name}" />
+                        <Label Content="{Binding DriverId}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

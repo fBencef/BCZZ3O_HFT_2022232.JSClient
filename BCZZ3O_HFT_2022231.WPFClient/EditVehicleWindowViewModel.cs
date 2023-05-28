@@ -63,7 +63,7 @@ namespace BCZZ3O_HFT_2022231.WPFClient
                 {
                     Vehicles.Add(new Vehicle()
                     {
-                        Registration = SelectedVehicle.DisplayReg,
+                        Registration = SelectedVehicle.Registration,
                         DisplayReg = SelectedVehicle.DisplayReg,
                         Manufacturer = SelectedVehicle.Manufacturer,
                         Model = SelectedVehicle.Model,

@@ -17,13 +17,13 @@
         <ListBox ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding DisplayReg}" />
+                    <Label Content="{Binding Registration}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="2">
             <Label Content="Registration" Background="LightBlue" Padding="10" />
-            <TextBox Text="{Binding SelectedVehicle.DisplayReg}" Padding="10"/>
+            <TextBox Text="{Binding SelectedVehicle.Registration}" Padding="10"/>
             <Label Content="Manufacturer" Background="LightBlue" Padding="10" />
             <TextBox Text="{Binding SelectedVehicle.Manufacturer}" Padding="10"/>
             <Label Content="Model" Background="LightBlue" Padding="10" />

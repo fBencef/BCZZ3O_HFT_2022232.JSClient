@@ -155,7 +155,7 @@ function display() {
         document.getElementById('vehicleresultarea').innerHTML = "";
         vehicles.forEach(t => {
             document.getElementById('vehicleresultarea').innerHTML +=
-                "<tr><td>" + t.displayReg + "</td><td>"
+                "<tr><td>" + t.registration + "</td><td>"
                 + t.manufacturer + "</td><td>"
                 + t.model + "</td><td>"
                 + t.length + "</td><td>"

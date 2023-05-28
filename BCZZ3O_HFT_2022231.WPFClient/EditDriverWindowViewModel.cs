@@ -62,7 +62,7 @@ namespace BCZZ3O_HFT_2022231.WPFClient
                 {
                     Drivers.Add(new Driver()
                     {
-                        DriverId = SelectedDriver.DriverId,
+                        //DriverId = SelectedDriver.DriverId,
                         Name = SelectedDriver.Name,
                         Age = SelectedDriver.Age,
                         Shifts = SelectedDriver.Shifts
