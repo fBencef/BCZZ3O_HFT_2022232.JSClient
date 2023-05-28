@@ -1,29 +1,60 @@
 ﻿let vehicles = [];
 let drivers = [];
+let shifts = [];
+
 let connection = null;
 let showing = 'vehicle';
 
 let vehicleIdToUpdate = '';
 let driverToUpdate = -1;
+let shiftToUpdate = -1;
 
 getData();
 setupSignalR();
 
-function vehiclebuttonclicked() {
-    document.getElementById('vehiclecatalogdiv').style.display = 'initial';
-    document.getElementById('drivercatalogdiv').style.display = 'none';
+function pagebuttonclicked(page) {
 
-    showing = 'vehicle';
+    showing = page;
+    if (showing == 'vehicle') {
+        document.getElementById('vehiclecatalogdiv').style.display = 'initial';
+        document.getElementById('drivercatalogdiv').style.display = 'none';
+        document.getElementById('shiftcatalogdiv').style.display = 'none';
+    }
+    if (showing == 'driver') {
+        document.getElementById('vehiclecatalogdiv').style.display = 'none';
+        document.getElementById('drivercatalogdiv').style.display = 'initial';
+        document.getElementById('shiftcatalogdiv').style.display = 'none';
+    }
+    if (showing == 'shift') {
+        document.getElementById('vehiclecatalogdiv').style.display = 'none';
+        document.getElementById('drivercatalogdiv').style.display = 'none';
+        document.getElementById('shiftcatalogdiv').style.display = 'initial';
+    }
     display();
 }
 
-function driverbuttonclicked() {
-    document.getElementById('vehiclecatalogdiv').style.display = 'none';
-    document.getElementById('drivercatalogdiv').style.display = 'initial';
+//function vehiclebuttonclicked() {
 
-    showing = 'driver';
-    display();
-}
+
+//    showing = 'vehicle';
+//    display();
+//}
+
+//function driverbuttonclicked() {
+//    document.getElementById('vehiclecatalogdiv').style.display = 'none';
+//    document.getElementById('drivercatalogdiv').style.display = 'initial';
+//    document.getElementById('shiftcatalogdiv').style.display = 'none';
+
+//    showing = 'driver';
+//    display();
+//}
+
+//function shiftbuttonclicked() {
+
+
+//    showing = 'shift';
+//    display();
+//}
 
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
@@ -40,6 +71,30 @@ function setupSignalR() {
     });
 
     connection.on("VehicleUpdated", (user, message) => {
+        getData();
+    });
+
+    connection.on("DriverCreated", (user, message) => {
+        getData();
+    });
+
+    connection.on("DriverDeleted", (user, message) => {
+        getData();
+    });
+
+    connection.on("DriverUpdated", (user, message) => {
+        getData();
+    });
+
+    connection.on("ShiftCreated", (user, message) => {
+        getData();
+    });
+
+    connection.on("ShiftDeleted", (user, message) => {
+        getData();
+    });
+
+    connection.on("ShiftUpdated", (user, message) => {
         getData();
     });
 
@@ -71,7 +126,14 @@ async function getData() {
         .then(x => x.json())
         .then(y => {
             drivers = y;
-            console.log(drivers);
+            //console.log(drivers);
+            display();
+        });
+    await fetch('http://localhost:47322/shift')
+        .then(x => x.json())
+        .then(y => {
+            shifts = y;
+            console.log(shifts);
             display();
         });
 }
@@ -107,6 +169,24 @@ function display() {
             //console.log(t.registration)
         });
     }
+    if (showing == 'shift') {
+        console.log("SHOW SHIFT")
+        document.getElementById('shiftresultarea').innerHTML = "";
+        shifts.forEach(t => {
+            document.getElementById('shiftresultarea').innerHTML +=
+                "<tr><td>" + t.shiftId + "</td><td>"
+                + t.line + "/" + t.tour + "</td><td>"
+                + t.fromYard + "</td><td>"
+                + t.vehicleId + "</td><td>"
+                + t.driverId + "</td><td>"
+                //+ t.vehicles.find(k => k['registration'] == vehicleId)['displayReg'] + "</td><td>"
+                //+ t.drivers.find(k => k['driverId'] == driverId)['name'] + "</td><td>"
+                + `<button type="button" onclick="remove(${t.shiftId})">Delete</button>`
+                + `<button type="button" onclick="showupdate(${t.shiftId})">Update</button>`
+                + "</td></tr>";
+            //console.log(t.registration)
+        });
+    }
 }
 
 function showupdate(id) {
@@ -131,6 +211,19 @@ function showupdate(id) {
 
 
         driverToUpdate = id;
+    }
+    if (showing == 'shift') {
+        document.getElementById('shiftupdateformdiv').style.display = 'flex';
+                                 
+        document.getElementById('shiftidtoupdate').value = shifts.find(t => t['shiftId'] == id)['shiftId']
+        document.getElementById('shiftlinetoupdate').value = shifts.find(t => t['shiftId'] == id)['line']
+        document.getElementById('shifttourtoupdate').value = shifts.find(t => t['shiftId'] == id)['tour']
+        document.getElementById('shiftyardtoupdate').value = shifts.find(t => t['shiftId'] == id)['fromYard']
+        document.getElementById('shiftvehicletoupdate').value = shifts.find(t => t['shiftId'] == id)['vehicleId']
+        document.getElementById('shiftdrivertoupdate').value = shifts.find(t => t['shiftId'] == id)['driverId']
+
+
+        shiftToUpdate = id;
     }
 
 }
@@ -183,11 +276,38 @@ function create() {
             })
             .catch((error) => { console.error('Error:', error); });
     }
+    if (showing == 'shift') {
+        let line = document.getElementById('shiftline').value;
+        let tour = document.getElementById('shifttour').value;
+        let fromYard = document.getElementById('shiftyard').value;
+        let vehicleId = document.getElementById('shiftvehicle').value;
+        let driverId = document.getElementById('shiftdriver').value;
+
+        fetch('http://localhost:47322/shift', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify(
+                {
+                    line: line,
+                    tour: tour,
+                    fromYard: fromYard,
+                    vehicleId: vehicleId,
+                    driverId: driverId
+                }),
+        })
+            .then(response => response)
+            .then(data => {
+                console.log('Success:', data);
+                getData();
+            })
+            .catch((error) => { console.error('Error:', error); });
+    }
 }
 
 function update() {
     document.getElementById('vehicleupdateformdiv').style.display = 'none';
     document.getElementById('driverupdateformdiv').style.display = 'none';
+    document.getElementById('shiftupdateformdiv').style.display = 'none';
 
     if (showing == 'vehicle') {
         //let displayReg = document.getElementById('displayregtoupdate').value;
@@ -236,8 +356,35 @@ function update() {
             })
             .catch((error) => { console.error('Error:', error); });
     }
+    if (showing == 'shift') {
+        let line = document.getElementById('shiftlinetoupdate').value;
+        let tour = document.getElementById('shifttourtoupdate').value;
+        let fromYard = document.getElementById('shiftyardtoupdate').value;
+        let vehicleId = document.getElementById('shiftvehicletoupdate').value;
+        let driverId = document.getElementById('shiftdrivertoupdate').value;
 
-    
+        fetch('http://localhost:47322/shift', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify(
+                {
+                    shiftId: shiftToUpdate,
+                    line: line,
+                    tour: tour,
+                    fromYard: fromYard,
+                    vehicleId: vehicleId,
+                    driverId: driverId
+                }),
+        })
+            .then(response => response)
+            .then(data => {
+                console.log('Success:', data);
+                getData();
+            })
+            .catch((error) => { console.error('Error:', error); });
+    }
+
+
 }
 
 function remove(id) {
@@ -268,6 +415,19 @@ function remove(id) {
             })
             .catch((error) => { console.error('Error:', error); });
     }
+    if (showing == 'shift') {
+        fetch('http://localhost:47322/shift/' + id, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', },
+            body: null
+        })
+            .then(response => response)
+            .then(data => {
+                console.log('Success:', data);
+                getData();
+            })
+            .catch((error) => { console.error('Error:', error); });
+    }
 
-    
+
 }

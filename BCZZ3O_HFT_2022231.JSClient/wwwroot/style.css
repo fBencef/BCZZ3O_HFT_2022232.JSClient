@@ -22,33 +22,33 @@ th {
     background-color: lightcyan;
 }
 
-#vehicleupdateformdiv, #driverupdateformdiv {
+#vehicleupdateformdiv, #driverupdateformdiv, #shiftupdateformdiv {
     display: none;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-    #vehicleupdateformdiv, #driverupdateformdiv label, input, button {
+    #vehicleupdateformdiv, #driverupdateformdiv, #shiftupdateformdiv label, input, button {
         margin: 10px;
         padding: 5px;
     }
 
-    #vehicleupdateformdiv, #driverupdateformdiv label {
+    #vehicleupdateformdiv, #driverupdateformdiv, #shiftupdateformdiv label {
         font-weight: bolder;
     }
 
-#vehicleformdiv, #driverformdiv {
+#vehicleformdiv, #driverformdiv, #shiftformdiv {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-    #vehicleformdiv, #driverformdiv label, input, button {
+    #vehicleformdiv, #driverformdiv, #shiftformdiv label, input, button {
         margin: 10px;
         padding: 5px;
     }
 
-    #vehicleformdiv, #driverformdiv label {
+    #vehicleformdiv, #driverformdiv, #shiftformdiv label {
         font-weight: bolder;
     }
 
@@ -62,4 +62,8 @@ table button {
 
 #drivercatalogdiv {
     display: initial
+}
+
+#shiftcatalogdiv {
+    display: none
 }

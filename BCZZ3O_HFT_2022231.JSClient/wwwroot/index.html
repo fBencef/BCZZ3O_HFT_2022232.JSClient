@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <button type="button" onclick="vehiclebuttonclicked()">Vehcile Catalog</button>
-    <button type="button" onclick="driverbuttonclicked()">Driver Catalog</button>
+    <button type="button" onclick="pagebuttonclicked('vehicle')">Vehcile Catalog</button>
+    <button type="button" onclick="pagebuttonclicked('driver')">Driver Catalog</button>
+    <button type="button" onclick="pagebuttonclicked('shift')">Shift Catalog</button>
     <div id="vehiclecatalogdiv">
         <h1>Vehicle Catalog</h1>
 
@@ -96,6 +97,65 @@
                 </tr>
             </thead>
             <tbody id="driverresultarea">
+            </tbody>
+        </table>
+    </div>
+    <div id="shiftcatalogdiv">
+        <h1>Shift Catalog</h1>
+
+        <div id="shiftformdiv">
+            <label>Line</label>
+            <input type="text" id="shiftline" />
+
+            <label>Tour</label>
+            <input type="text" id="shifttour" />
+
+            <label>Depot</label>
+            <input type="text" id="shiftyard" />
+
+            <label>Vehicle (Registration)</label>
+            <input type="text" id="shiftvehicle" />
+
+            <label>Driver (ID)</label>
+            <input type="text" id="shiftdriver" />
+
+            <button type="button" onclick="create()">Add Shift</button>
+        </div>
+
+        <div id="shiftupdateformdiv">
+            <label>ID</label>
+            <input type="text" id="shiftidtoupdate" disabled />
+
+            <label>Line</label>
+            <input type="text" id="shiftlinetoupdate" />
+
+            <label>Tour</label>
+            <input type="text" id="shifttourtoupdate" />
+
+            <label>Depot</label>
+            <input type="text" id="shiftyardtoupdate" />
+
+            <label>Vehicle (Registration)</label>
+            <input type="text" id="shiftvehicletoupdate" />
+
+            <label>Driver (ID)</label>
+            <input type="text" id="shiftdrivertoupdate" />
+
+            <button type="button" onclick="update()">Update Shift</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Line/Tour</th>
+                    <th>Depot</th>
+                    <th>Vehicle</th>
+                    <th>Driver</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="shiftresultarea">
             </tbody>
         </table>
     </div>
