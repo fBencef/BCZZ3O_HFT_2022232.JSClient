@@ -13,7 +13,7 @@ namespace VehicleFleetDb.Models
     {
         [Key]
         [Required]
-        [StringLength(6)]
+        [StringLength(7)]
         public string Registration { get; set; }
 
         public string DisplayReg { get; set; }
