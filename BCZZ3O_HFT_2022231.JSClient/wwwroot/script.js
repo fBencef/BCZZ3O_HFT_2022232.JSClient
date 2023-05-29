@@ -43,29 +43,6 @@ function pagebuttonclicked(page) {
     display();
 }
 
-//function vehiclebuttonclicked() {
-
-
-//    showing = 'vehicle';
-//    display();
-//}
-
-//function driverbuttonclicked() {
-//    document.getElementById('vehiclecatalogdiv').style.display = 'none';
-//    document.getElementById('drivercatalogdiv').style.display = 'initial';
-//    document.getElementById('shiftcatalogdiv').style.display = 'none';
-
-//    showing = 'driver';
-//    display();
-//}
-
-//function shiftbuttonclicked() {
-
-
-//    showing = 'shift';
-//    display();
-//}
-
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
         .withUrl("http://localhost:47322/hub")
@@ -153,17 +130,19 @@ function display() {
     if (showing == 'vehicle') {
         console.log("SHOW VEHICLE")
         document.getElementById('vehicleresultarea').innerHTML = "";
+        let regvar = '';
         vehicles.forEach(t => {
+            regvar = t.registration;
             document.getElementById('vehicleresultarea').innerHTML +=
                 "<tr><td>" + t.registration + "</td><td>"
                 + t.manufacturer + "</td><td>"
                 + t.model + "</td><td>"
                 + t.length + "</td><td>"
-                + `<button type="button" onclick="remove(${t.registration})">Delete</button>`
-                + `<button type="button" onclick="showupdate(${t.registration})">Update</button>`
+                + `<button type="button" onclick="remove('${t.registration}')">Delete</button>`
+                + `<button type="button" onclick="showupdate('${t.registration}')">Update</button>`
                 + "</td></tr>";
-            //console.log(t.registration)
         });
+        console.log('80')
     }
     if (showing == 'driver') {
         console.log("SHOW DRIVER")
@@ -176,7 +155,6 @@ function display() {
                 + `<button type="button" onclick="remove(${t.driverId})">Delete</button>`
                 + `<button type="button" onclick="showupdate(${t.driverId})">Update</button>`
                 + "</td></tr>";
-            //console.log(t.registration)
         });
     }
     if (showing == 'shift') {
@@ -207,44 +185,6 @@ function display() {
     }
 }
 
-function showupdate(id) {
-    if (showing == 'vehicle') {
-        document.getElementById('vehicleupdateformdiv').style.display = 'flex';
-
-        document.getElementById('vehicleregtoupdate').value = vehicles.find(t => t['registration'] == id)['registration']
-        document.getElementById('displayregtoupdate').value = vehicles.find(t => t['registration'] == id)['displayReg']
-        document.getElementById('vehiclemanufacttoupdate').value = vehicles.find(t => t['registration'] == id)['manufacturer']
-        document.getElementById('vehiclemodeltoupdate').value = vehicles.find(t => t['registration'] == id)['model']
-        document.getElementById('vehiclelengthtoupdate').value = vehicles.find(t => t['registration'] == id)['length']
-
-
-        vehicleIdToUpdate = id;
-    }
-    if (showing == 'driver') {
-        document.getElementById('driverupdateformdiv').style.display = 'flex';
-
-        document.getElementById('driveridtoupdate').value = drivers.find(t => t['driverId'] == id)['driverId']
-        document.getElementById('drivernametoupdate').value = drivers.find(t => t['driverId'] == id)['name']
-        document.getElementById('driveragetoupdate').value = drivers.find(t => t['driverId'] == id)['age']
-
-
-        driverToUpdate = id;
-    }
-    if (showing == 'shift') {
-        document.getElementById('shiftupdateformdiv').style.display = 'flex';
-                                 
-        document.getElementById('shiftidtoupdate').value = shifts.find(t => t['shiftId'] == id)['shiftId']
-        document.getElementById('shiftlinetoupdate').value = shifts.find(t => t['shiftId'] == id)['line']
-        document.getElementById('shifttourtoupdate').value = shifts.find(t => t['shiftId'] == id)['tour']
-        document.getElementById('shiftyardtoupdate').value = shifts.find(t => t['shiftId'] == id)['fromYard']
-        document.getElementById('shiftvehicletoupdate').value = shifts.find(t => t['shiftId'] == id)['vehicleId']
-        document.getElementById('shiftdrivertoupdate').value = shifts.find(t => t['shiftId'] == id)['driverId']
-
-
-        shiftToUpdate = id;
-    }
-
-}
 function create() {
     if (showing == 'vehicle') {
         let registration = document.getElementById('vehiclereg').value;
@@ -321,6 +261,43 @@ function create() {
             .catch((error) => { console.error('Error:', error); });
     }
 }
+function showupdate(id) {
+    if (showing == 'vehicle') {
+        document.getElementById('vehicleupdateformdiv').style.display = 'flex';
+
+        document.getElementById('vehicleregtoupdate').value = vehicles.find(t => t['registration'] == id)['registration']
+        document.getElementById('vehiclemanufacttoupdate').value = vehicles.find(t => t['registration'] == id)['manufacturer']
+        document.getElementById('vehiclemodeltoupdate').value = vehicles.find(t => t['registration'] == id)['model']
+        document.getElementById('vehiclelengthtoupdate').value = vehicles.find(t => t['registration'] == id)['length']
+
+
+        vehicleIdToUpdate = id;
+    }
+    if (showing == 'driver') {
+        document.getElementById('driverupdateformdiv').style.display = 'flex';
+
+        document.getElementById('driveridtoupdate').value = drivers.find(t => t['driverId'] == id)['driverId']
+        document.getElementById('drivernametoupdate').value = drivers.find(t => t['driverId'] == id)['name']
+        document.getElementById('driveragetoupdate').value = drivers.find(t => t['driverId'] == id)['age']
+
+
+        driverToUpdate = id;
+    }
+    if (showing == 'shift') {
+        document.getElementById('shiftupdateformdiv').style.display = 'flex';
+
+        document.getElementById('shiftidtoupdate').value = shifts.find(t => t['shiftId'] == id)['shiftId']
+        document.getElementById('shiftlinetoupdate').value = shifts.find(t => t['shiftId'] == id)['line']
+        document.getElementById('shifttourtoupdate').value = shifts.find(t => t['shiftId'] == id)['tour']
+        document.getElementById('shiftyardtoupdate').value = shifts.find(t => t['shiftId'] == id)['fromYard']
+        document.getElementById('shiftvehicletoupdate').value = shifts.find(t => t['shiftId'] == id)['vehicleId']
+        document.getElementById('shiftdrivertoupdate').value = shifts.find(t => t['shiftId'] == id)['driverId']
+
+
+        shiftToUpdate = id;
+    }
+
+}
 
 function update() {
     document.getElementById('vehicleupdateformdiv').style.display = 'none';
@@ -328,7 +305,6 @@ function update() {
     document.getElementById('shiftupdateformdiv').style.display = 'none';
 
     if (showing == 'vehicle') {
-        //let displayReg = document.getElementById('displayregtoupdate').value;
         let manufacturer = document.getElementById('vehiclemanufacttoupdate').value;
         let model = document.getElementById('vehiclemodeltoupdate').value;
         let length = document.getElementById('vehiclelengthtoupdate').value;
@@ -339,11 +315,11 @@ function update() {
             body: JSON.stringify(
                 {
                     registration: vehicleIdToUpdate,
-                    displayReg: displayReg,
+                    displayReg: vehicleIdToUpdate,
                     manufacturer: manufacturer,
                     model: model,
                     length: length,
-                    registrationDate: registrationDate
+                    registrationDate: vehicles.find(t => t['registration'] == vehicleIdToUpdate)['registrationDate']
                 }),
         })
             .then(response => response)
@@ -406,9 +382,8 @@ function update() {
 }
 
 function remove(id) {
-
     if (showing == 'vehicle') {
-        fetch('http://localhost:47322/vehicle/' + id, {
+        fetch('http://localhost:47322/vehicle/' + String(id), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', },
             body: null
